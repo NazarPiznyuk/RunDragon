@@ -1,0 +1,34 @@
+﻿using System;
+using Android.App;
+using Android.Content.PM;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+using Android.OS;
+using Android.Media;
+using Xamarin;
+using Xamarin.Forms;
+using DragonRun;
+
+namespace App1.Droid
+{
+    [Activity(Label = "App1", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    {
+        MediaPlayer player;
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            TabLayoutResource = Resource.Layout.Tabbar;
+            ToolbarResource = Resource.Layout.Toolbar;
+            //player = MediaPlayer.Create(this,Resource.Raw.bang);
+            ////player.Start();
+            base.OnCreate(savedInstanceState);
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            LoadApplication(new App());
+        }
+        public void StateMusic_Toggled(object sender, ToggledEventArgs e)
+        {
+            
+        }
+    }
+}

@@ -1,0 +1,19 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DragonRun.Setting">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Button x:Name="btnLeaderBoadr" Text="LeaderBoadr" Command="{Binding LeaderBoardCommand}" BackgroundColor="Aqua" FontAttributes="Italic" BorderRadius="15" Margin="10" FontSize="Large"></Button>
+            <Button x:Name="btnAbout" Text="About" Command="{Binding AboutCommand}" FontAttributes="Italic" BackgroundColor="Aqua" BorderRadius="15" Margin="10" FontSize="Large"></Button>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Grid.Row="0" Text="Sound"  FontAttributes="Italic" FontSize="Large"/>
+                <Switch Grid.Row="0" x:Name="StateMusic" IsToggled="{Binding IsMusicOn, Mode=TwoWay}"/>
+            </StackLayout>
+            
+           
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

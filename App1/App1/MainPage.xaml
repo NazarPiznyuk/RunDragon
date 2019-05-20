@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DragonRun"
+             x:Class="DragonRun.MainPage">
+
+    
+    <Grid BackgroundColor="Red">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <AbsoluteLayout x:Name="layout" Grid.Row="0">
+            <AbsoluteLayout.GestureRecognizers>
+                <TapGestureRecognizer 
+                    Command="{Binding TapCommand}"/>
+            </AbsoluteLayout.GestureRecognizers>
+            <Image x:Name="player" AbsoluteLayout.LayoutBounds="0,.5,65,65"  AbsoluteLayout.LayoutFlags="PositionProportional"
+                   Source ="{Binding Image, Mode=TwoWay}" Aspect="AspectFit" />
+
+            <!--<Image x:Name="enemy" AbsoluteLayout.LayoutBounds=".5,.5,65,65"  AbsoluteLayout.LayoutFlags="PositionProportional"
+                   Source ="{Binding ImageEnemy, Mode=TwoWay}" Aspect="AspectFit" />-->
+        </AbsoluteLayout>
+
+        <Button x:Name="btnStart"  Grid.Row="1" Text="Start animation" Command="{Binding AnimationCommand}"/>
+        <Button x:Name="btnSetting" Text="Setting" FontSize="Large" VerticalOptions="StartAndExpand" Command="{Binding SettingCommand}"></Button>
+        <!-- Command="{Binding AnimationCommand} -->
+    </Grid>
+
+</ContentPage>
