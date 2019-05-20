@@ -9,36 +9,25 @@ using Xamarin.Forms.Xaml;
 
 namespace DragonRun
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class LeaderBoard : ContentPage
-	{
-        List<DbModel> dbModels = new List<DbModel>();
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class LeaderBoard : ContentPage
+    {
         public string dbPath = "";
-        Label label = new Label();
-		public LeaderBoard ()
-		{
+        public LeaderBoard()
+        {
             dbPath = DependencyService.Get<IPath>().GetDatabasePath(App.DBFILENAME);
-            InitializeComponent ();
-            
-       
-        }
-        private void GetDataFromDB()
-        {
-            using (var db = new ApllicationContext(dbPath))
-            {
-                dbModels = db.DbModels.ToList();
-            }
-
-            foreach (var a in dbModels)
-            {
-                label.Text = a.Name;
-            }
-            
-        }
-        public void CreateInterface()
-        {
-            Content = label;
+            InitializeComponent();
 
         }
-	}
+
+        protected override void OnAppearing()
+        {
+            string dbPath = DependencyService.Get<IPath>().GetDatabasePath(App.DBFILENAME);
+            using (ApllicationContext db = new ApllicationContext(dbPath))
+            {
+                leaderBoard.ItemsSource = db.DbModels.ToList();
+            }
+            base.OnAppearing();
+        }
+    }
 }

@@ -19,7 +19,7 @@ namespace DragonRun
             {
                 
                 db.Database.EnsureCreated();
-                db.DbModels.Add(new DbModel { Name = "Slavik", Score = 100 });
+                db.DbModels.Add(new DbModel { Name = "Nazar", Score = 123 });
 
             }
                 MainPage = new NavigationPage(new MainPage());
