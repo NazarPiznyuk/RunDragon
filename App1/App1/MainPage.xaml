@@ -3,14 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:DragonRun"
              x:Class="DragonRun.MainPage">
-
     
-    <Grid BackgroundColor="Red">
+    <Grid>
+
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <AbsoluteLayout x:Name="layout" Grid.Row="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Image Source="Resources/1.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" Grid.RowSpan="1" Grid.ColumnSpan="1"/-->
+        <AbsoluteLayout x:Name="layout" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
             <AbsoluteLayout.GestureRecognizers>
                 <TapGestureRecognizer 
                     Command="{Binding TapCommand}"/>
@@ -22,9 +28,10 @@
                    Source ="{Binding ImageEnemy, Mode=TwoWay}" Aspect="AspectFit" />-->
         </AbsoluteLayout>
 
-        <Button x:Name="btnStart"  Grid.Row="1" Text="Start animation" Command="{Binding AnimationCommand}"/>
-        <Label Grid.Row="1" x:Name="name" Text="{Binding score}" BackgroundColor="Aqua"></Label>
-        <Button x:Name="btnSetting" Text="Setting" FontSize="Large" VerticalOptions="StartAndExpand" Command="{Binding SettingCommand}"></Button>
+        
+        <!--Button x:Name="btnStart"  Text="Start animation" Command="{Binding AnimationCommand}"/-->
+        <Label  Grid.Row="0" Grid.Column="1"  x:Name="name" Text="{Binding score}" HorizontalTextAlignment="Center"  TextColor="Gold" FontSize="45" ></Label>
+        <Button Grid.Row="0" Grid.Column="0" BackgroundColor="White" Image="Set1.png"  Command="{Binding SettingCommand}"></Button>
         <!-- Command="{Binding AnimationCommand} -->
     </Grid>
 
