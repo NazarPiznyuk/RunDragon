@@ -2,18 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DragonRun.Setting">
     <ContentPage.Content>
-        <ScrollView>
-        <StackLayout>
-                <Button x:Name="btnLeaderBoadr" Text="LeaderBoadr" Command="{Binding LeaderBoardCommand}"
-                      HorizontalOptions="Center"  BackgroundColor="Aqua" FontAttributes="Italic" BorderRadius="15" Margin="10" FontSize="Large"></Button>
-                <Button x:Name="btnAbout" Text="About" Command="{Binding AboutCommand}"
-                        FontAttributes="Italic" BackgroundColor="Aqua" BorderRadius="15" Margin="10" FontSize="Large"></Button>
-
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label Grid.Row="0" Text="Sound"  FontAttributes="Italic" FontSize="Large"/>
-                    <Switch Grid.Row="0" x:Name="StateMusic" IsToggled="{Binding IsMusicOn, Mode=TwoWay}"/>
-                </StackLayout>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" >
+            <Button x:Name="btnLeaderBoadr" Text="LeaderBoadr"  BackgroundColor="White" Command="{Binding LeaderBoardCommand}"
+                      HorizontalOptions="Center"   FontAttributes="Italic" BorderRadius="15"  FontSize="Large"></Button>
+            <Button x:Name="btnAbout" Text="About" BackgroundColor="White" Command="{Binding AboutCommand}"
+                        FontAttributes="Italic"  BorderRadius="15"  FontSize="Large"></Button>
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label  Text="Sound" FontAttributes="Italic" FontSize="Large"/>
+                <Switch  x:Name="StateMusic" IsToggled="{Binding IsMusicOn, Mode=TwoWay}"/>
             </StackLayout>
-        </ScrollView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -18,11 +18,15 @@
   <ItemGroup>
     <None Remove="bang.mp3" />
     <None Remove="enemy.png" />
+    <None Remove="enemy2.png" />
     <None Remove="pic1.png" />
     <None Remove="pic2.png" />
     <None Remove="pic3.png" />
     <None Remove="pic4.png" />
+    <None Remove="pic5.png" />
+    <None Remove="Resources\1.png" />
     <None Remove="Resources\bang.mp3" />
+    <None Remove="Set1.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +44,10 @@
     <EmbeddedResource Include="bang.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="enemy2.png" />
+    <EmbeddedResource Include="pic5.png" />
+    <EmbeddedResource Include="Resources\1.png" />
+    <EmbeddedResource Include="Set1.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -85,5 +93,23 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="About.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="LeaderBoard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Setting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 </Project>

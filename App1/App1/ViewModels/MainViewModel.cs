@@ -70,8 +70,8 @@ namespace DragonRun
 
             this.Player = Player;
             this.Layout = layout;
-            Image = ImageSource.FromFile("pic1.png");
-            ImageEnemy = ImageSource.FromFile("enemy.png");
+            Image = ImageSource.FromFile("pic5.png");
+            ImageEnemy = ImageSource.FromFile("enemy2.png");
 
             layout = this.Layout;
             this.Navigation = Navigation;
