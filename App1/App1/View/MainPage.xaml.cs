@@ -10,14 +10,10 @@ namespace DragonRun
 {
     public partial class MainPage : ContentPage
     {
-        Image img;
         public MainPage()
         {
             InitializeComponent();
-            this.BindingContext = new MainViewModel(ref this.player, ref this.layout, Navigation, name);
-            
-              
-
+            this.BindingContext = new MainViewModel(ref this.player, ref this.layout, Navigation);
         }
 
         

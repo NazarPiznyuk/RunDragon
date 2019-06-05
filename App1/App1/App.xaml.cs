@@ -19,7 +19,8 @@ namespace DragonRun
             {
                 db.Database.EnsureCreated();
             }
-                MainPage = new NavigationPage(new AuthenticationPage());
+                //MainPage = new NavigationPage(new AuthenticationPage());
+                MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()

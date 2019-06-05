@@ -28,6 +28,13 @@ namespace DragonRun
             RegisterCommand = new Command(() =>
             {
                 ErrorVisibility = false;
+                if(string.IsNullOrEmpty(Login) || string.IsNullOrEmpty(Email) 
+                || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(ConfirmPassword))
+                {
+                    ErrorText = "Enter all input fields!";
+                    ErrorVisibility = true;
+                    return;
+                }
                 if (Password != ConfirmPassword)
                 {
                     ErrorText = "Password confirmation does not match the password";
@@ -56,17 +63,16 @@ namespace DragonRun
                 OwnScore = null
             };
             var content = JsonConvert.SerializeObject(User);
-            HttpResponseMessage response = null;
-
             var strcontent = new StringContent(content, Encoding.UTF8, "application/json");
 
-            response = await client.PostAsync("http://10.0.2.2:5001/api/users/", strcontent);
+            HttpResponseMessage response = await client.PostAsync("http://10.0.2.2:5001/api/users/", strcontent);
             if (!response.IsSuccessStatusCode)
             {
                 ErrorText = await response.Content.ReadAsStringAsync();
                 ErrorVisibility = true;
+                return;
             }
-
+            Application.Current.MainPage = new NavigationPage(new MainPage());
         }
     }
 }

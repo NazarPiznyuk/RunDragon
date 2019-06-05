@@ -28,9 +28,15 @@ namespace DragonRun
         public Label label { get; set; }
         bool isJumpAnimation = false;
         bool isGameStarted = false;
-        int score;
         INavigation Navigation;
         ISimpleAudioPlayer musicPlayer;
+
+        public int Score
+        {
+            get;
+            set;
+        }
+
 
         public ImageSource Image
         {
@@ -59,9 +65,8 @@ namespace DragonRun
         public ICommand SettingCommand { get; set; }
         
 
-        public MainViewModel(ref Image Player, ref AbsoluteLayout layout, INavigation Navigation, Label label)
+        public MainViewModel(ref Image Player, ref AbsoluteLayout layout, INavigation Navigation)
         {
-            this.label = label;
             var assembly = typeof(App).GetTypeInfo().Assembly;
             Stream audioStream = assembly.GetManifestResourceStream("DragonRun." + "bang.mp3");
             musicPlayer =  CrossSimpleAudioPlayer.Current;
@@ -98,9 +103,7 @@ namespace DragonRun
             var tmp = (sender as Image);
             Debug.WriteLine($"Message from {tmp.StyleId}");
             //Debug.WriteLine($"Player right: {Player.Bounds.Right} Enemy left: {Enemy.TranslationX}");
-            score++;
-            label.Text = score.ToString();
-            Debug.WriteLine($"Score:{score}");
+            Score++;
             if (tmp.TranslationX + this.Layout.Width - this.Player.Width - tmp.Width <= 0
                 && tmp.TranslationX + this.Layout.Width > 0)
             {
@@ -127,15 +130,13 @@ namespace DragonRun
             }
         }
 
-        int numb = 1;
         private Image CreateEnemy()
         {
             Image a = new Image()
             {
-                StyleId = $"Enemy{numb}",
+                StyleId = $"Enemy",
                 Source = imageEnemy
             };
-            numb++;
             a.PropertyChanged += Enemy_PropertyChanged;
 
             AbsoluteLayout.SetLayoutFlags(a, AbsoluteLayoutFlags.PositionProportional);
@@ -155,13 +156,7 @@ namespace DragonRun
 
             Thread t1 = new Thread(MoveEnemy);
             t1.Start(Enemy);
-
-            Task.Delay(1000);
-            //Task.Factory.StartNew(() => MoveEnemy(Enemy));
-            //MoveEnemy(Enemy);
-
-            //this.Layout.Children.Add(Enemy2);
-            numb = 1;
+            
            
         }
 
@@ -189,7 +184,7 @@ namespace DragonRun
             var dbPath = DependencyService.Get<IPath>().GetDatabasePath(App.DBFILENAME);
             using (var db = new ApllicationContext(dbPath))
             {
-                DbModel dbModel = new DbModel() { Name = "bla", Score = score }; 
+                DbModel dbModel = new DbModel() { Name = "bla", Score = Score }; 
                 db.DbModels.Add(dbModel);
                 db.SaveChanges();
             }
@@ -213,18 +208,20 @@ namespace DragonRun
         private async void MoveEnemy(object sender)
         {
             bool isEnemyAnimationEnded = true;
-
+            var enemy = (sender as Image);
             while (isGameStarted)
             {
                 if (isEnemyAnimationEnded)
                 {
                     isEnemyAnimationEnded = false;
-                    bool tmp = await (sender as Image).TranslateTo(this.Layout.Width * -1, 0, 4000);
-                    if (!tmp)
-                    {
-                        isEnemyAnimationEnded = true;
-                        (sender as Image).TranslationX = Layout.Bounds.Right;
-                    }
+                    await enemy.TranslateTo(this.Layout.Width * -1, 0, 4000);
+                    isEnemyAnimationEnded = true;
+                    (sender as Image).TranslationX = Layout.Bounds.Right;
+                    //if (!tmp)
+                    //{
+                    //    
+                    //    
+                    //}
                     Debug.WriteLine("Move enemy otside animation");
 
                 }

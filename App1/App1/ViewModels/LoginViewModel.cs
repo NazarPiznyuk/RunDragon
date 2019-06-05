@@ -23,7 +23,16 @@ namespace DragonRun
         public LoginViewModel()
         {
             ErrorVisibility = false;
-            LoginCommand = new Command(() => { SignIn(); });
+
+            LoginCommand = new Command(() => {
+            if (string.IsNullOrEmpty(Login) || string.IsNullOrEmpty(Password))
+            {
+                ErrorText = "Enter all input fields!";
+                ErrorVisibility = true;
+                return;
+            }
+                SignIn();
+            });
         }
 
         private async void SignIn()
@@ -43,9 +52,15 @@ namespace DragonRun
                 Debug.WriteLine(ex.Message);
             }
 
-            ErrorText = await res.Content.ReadAsStringAsync();
-            ErrorVisibility = true;
-            //string content = await client.GetStringAsync("http://127.0.0.1:52983/api/users/" + Login);
+            if (!res.IsSuccessStatusCode)
+            {
+                ErrorText = await res.Content.ReadAsStringAsync();
+                ErrorVisibility = true;
+                return;
+            }
+
+            Application.Current.MainPage = new NavigationPage(new MainPage());
+            
 
         }
     }
