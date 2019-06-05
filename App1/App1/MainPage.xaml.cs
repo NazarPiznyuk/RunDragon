@@ -14,8 +14,9 @@ namespace DragonRun
         public MainPage()
         {
             InitializeComponent();
-            this.BindingContext = new MainViewModel(ref this.player, ref this.layout, Navigation);
+            this.BindingContext = new MainViewModel(ref this.player, ref this.layout, Navigation, name);
             
+              
 
         }
 

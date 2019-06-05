@@ -17,13 +17,9 @@ namespace DragonRun
             dbPath = DependencyService.Get<IPath>().GetDatabasePath(DBFILENAME);
             using (var db = new DragonRun.ApllicationContext(dbPath))
             {
-                
                 db.Database.EnsureCreated();
-                db.DbModels.Add(new DbModel { Name = "Nazar", Score = 123 });
-                db.SaveChanges();
             }
                 MainPage = new NavigationPage(new MainPage());
-           
         }
 
         protected override void OnStart()

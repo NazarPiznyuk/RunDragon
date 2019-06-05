@@ -22,12 +22,13 @@ namespace DragonRun
         Thread t;
         Image Player;
         Image Enemy;
-        //Image Enemy2;
         ImageSource image;
         ImageSource imageEnemy;
         AbsoluteLayout Layout;
+        public Label label { get; set; }
         bool isJumpAnimation = false;
         bool isGameStarted = false;
+        int score;
         INavigation Navigation;
         ISimpleAudioPlayer musicPlayer;
 
@@ -58,9 +59,9 @@ namespace DragonRun
         public ICommand SettingCommand { get; set; }
         
 
-        public MainViewModel(ref Image Player, ref AbsoluteLayout layout, INavigation Navigation)
+        public MainViewModel(ref Image Player, ref AbsoluteLayout layout, INavigation Navigation, Label label)
         {
-
+            this.label = label;
             var assembly = typeof(App).GetTypeInfo().Assembly;
             Stream audioStream = assembly.GetManifestResourceStream("DragonRun." + "bang.mp3");
             musicPlayer =  CrossSimpleAudioPlayer.Current;
@@ -71,18 +72,6 @@ namespace DragonRun
             this.Layout = layout;
             Image = ImageSource.FromFile("pic1.png");
             ImageEnemy = ImageSource.FromFile("enemy.png");
-            //this.Layout.Children.Add(new Image()
-            //{
-            //    Source = ImageSource.FromFile("pic1.png")
-            //}, new Rectangle(100, 100, 50, 50), AbsoluteLayoutFlags.All);
-
-
-            //            Enemy2.PropertyChanged += Enemy_PropertyChanged;
-
-
-
-            //this.Layout.Children.Add(Enemy);
-            //Debug.WriteLine(Enemy.TranslationX);
 
             layout = this.Layout;
             this.Navigation = Navigation;
@@ -105,9 +94,13 @@ namespace DragonRun
 
         private void Enemy_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
+            
             var tmp = (sender as Image);
             Debug.WriteLine($"Message from {tmp.StyleId}");
             //Debug.WriteLine($"Player right: {Player.Bounds.Right} Enemy left: {Enemy.TranslationX}");
+            score++;
+            label.Text = score.ToString();
+            Debug.WriteLine($"Score:{score}");
             if (tmp.TranslationX + this.Layout.Width - this.Player.Width - tmp.Width <= 0
                 && tmp.TranslationX + this.Layout.Width > 0)
             {
@@ -156,7 +149,7 @@ namespace DragonRun
         private void SpawnEnemy()
         {
             Enemy = CreateEnemy();
-            //Enemy2 = CreateEnemy();
+
 
             this.Layout.Children.Add(Enemy);
 
@@ -169,27 +162,37 @@ namespace DragonRun
 
             //this.Layout.Children.Add(Enemy2);
             numb = 1;
-           // Thread t2 = new Thread(MoveEnemy);
-            //t2.Start(Enemy2);
-
-            //Task.Factory.StartNew(() => MoveEnemy(Enemy2));
-            //MoveEnemy(Enemy2);
+           
         }
 
         private void NewGame()
         {
+            LoadToDB();
             for (int i = 0; i < this.Layout.Children.Count(x => x.StyleId.Contains("Enemy")); i++)
             {
                 var a = this.Layout.Children.First(x => x.StyleId.Contains("Enemy"));
                 this.Layout.Children.Remove(a);
+                
+                
             }
 
             this.Player.TranslationY = (double)AbsoluteLayout.HeightProperty.DefaultValue / 2;
 
             isGameStarted = true;
-
             SpawnEnemy();
 
+
+        }
+
+        private void LoadToDB()
+        {
+            var dbPath = DependencyService.Get<IPath>().GetDatabasePath(App.DBFILENAME);
+            using (var db = new ApllicationContext(dbPath))
+            {
+                DbModel dbModel = new DbModel() { Name = "bla", Score = score }; 
+                db.DbModels.Add(dbModel);
+                db.SaveChanges();
+            }
         }
 
         private void ChangePicture()
@@ -202,6 +205,8 @@ namespace DragonRun
                 Image = ImageSource.FromFile(src);
                 j = j == 4 ? 1 : ++j;
                 Thread.Sleep(50);
+               
+                
             }
         }
 
@@ -221,6 +226,7 @@ namespace DragonRun
                         (sender as Image).TranslationX = Layout.Bounds.Right;
                     }
                     Debug.WriteLine("Move enemy otside animation");
+
                 }
             }
         }

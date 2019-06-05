@@ -23,6 +23,7 @@
         </AbsoluteLayout>
 
         <Button x:Name="btnStart"  Grid.Row="1" Text="Start animation" Command="{Binding AnimationCommand}"/>
+        <Label Grid.Row="1" x:Name="name" Text="{Binding score}" BackgroundColor="Aqua"></Label>
         <Button x:Name="btnSetting" Text="Setting" FontSize="Large" VerticalOptions="StartAndExpand" Command="{Binding SettingCommand}"></Button>
         <!-- Command="{Binding AnimationCommand} -->
     </Grid>
