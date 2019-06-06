@@ -15,9 +15,9 @@ namespace DragonRun
         {
             InitializeComponent();
             this.BindingContext = new MainViewModel(ref this.player, ref this.layout, Navigation, name);
+            Image image = new Image();
+            image.Source = ImageSource.FromFile("DragonRun.101.jpg");
             
-              
-
         }
 
         

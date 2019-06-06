@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:DragonRun"
-             x:Class="DragonRun.MainPage">
+             x:Class="DragonRun.MainPage" BackgroundImage="background.jpg">
     
     <Grid>
 
@@ -14,7 +14,7 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
+        <!--<Image Source="backgr.jpg" Grid.ColumnSpan="2" Grid.RowSpan="2" Aspect="AspectFill"/>-->
         <!--Image Source="Resources/1.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" Grid.RowSpan="1" Grid.ColumnSpan="1"/-->
         <AbsoluteLayout x:Name="layout" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">
             <AbsoluteLayout.GestureRecognizers>

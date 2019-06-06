@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DragonRun.Setting">
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" >
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center"  >
             <Button x:Name="btnLeaderBoadr" Text="LeaderBoadr"  BackgroundColor="White" Command="{Binding LeaderBoardCommand}"
                       HorizontalOptions="Center"   FontAttributes="Italic" BorderRadius="15"  FontSize="Large"></Button>
             <Button x:Name="btnAbout" Text="About" BackgroundColor="White" Command="{Binding AboutCommand}"

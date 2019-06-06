@@ -16,6 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="background.jpg" />
     <None Remove="bang.mp3" />
     <None Remove="enemy.png" />
     <None Remove="enemy2.png" />
@@ -41,6 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="background.jpg" />
     <EmbeddedResource Include="bang.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
