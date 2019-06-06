@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CarouselPage  xmlns="http://xamarin.com/schemas/2014/forms"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:local="clr-namespace:DragonRun"
+               x:Class="DragonRun.AuthenticationPage">
+    <ContentPage x:Name="Login">
+        <ContentPage.BindingContext>
+            <local:LoginViewModel/>
+        </ContentPage.BindingContext>
+        <StackLayout Spacing="20" Padding="50" VerticalOptions="Center">
+            <Entry Placeholder="Email" Text="{Binding Login, Mode=TwoWay}"/>
+            <Entry Placeholder="Password" Text="{Binding Password, Mode=TwoWay}" IsPassword="True"/>
+            <Label IsVisible="{Binding ErrorVisibility}" Text="{Binding ErrorText, Mode=OneWay}"  TextColor="Red"/>
+            <Button Text="Log In" TextColor="White" Command="{Binding LoginCommand}" ></Button>
+
+            <Label HorizontalOptions="Center"
+                 VerticalOptions="CenterAndExpand">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Do not have an account? " />
+                        <Span Text="Register!"
+                  TextColor="Blue"
+                  TextDecorations="Underline">
+                            <Span.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavToRegister}"/>
+                            </Span.GestureRecognizers>
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+        </StackLayout>
+    </ContentPage>
+
+    <ContentPage x:Name="Register">
+        <ContentPage.BindingContext>
+            <local:RegisterViewModel/>
+        </ContentPage.BindingContext>
+        <StackLayout Spacing="20" Padding="50" VerticalOptions="Center">
+            <Entry Placeholder="Email" Text="{Binding Email}"/>
+            <Entry Placeholder="Login" Text="{Binding Login}"/>
+            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True"/>
+            <Entry Placeholder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True"/>
+            <Label IsVisible="{Binding ErrorVisibility}" Text="{Binding ErrorText, Mode=OneWay}"  TextColor="Red"/>
+            <Button Text="Register" Command="{Binding RegisterCommand}" TextColor="White"></Button>
+        </StackLayout>
+    </ContentPage>
+</CarouselPage>

@@ -30,7 +30,7 @@
 
         
         <!--Button x:Name="btnStart"  Text="Start animation" Command="{Binding AnimationCommand}"/-->
-        <Label  Grid.Row="0" Grid.Column="1"  x:Name="name" Text="{Binding score}" HorizontalTextAlignment="Center"  TextColor="Gold" FontSize="45" ></Label>
+        <Label  Grid.Row="0" Grid.Column="1" Text="{Binding Score}" HorizontalTextAlignment="Center"  TextColor="Gold" FontSize="45" ></Label>
         <Button Grid.Row="0" Grid.Column="0" BackgroundColor="White" Image="Set1.png"  Command="{Binding SettingCommand}"></Button>
         <!-- Command="{Binding AnimationCommand} -->
     </Grid>
